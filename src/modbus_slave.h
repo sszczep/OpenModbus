@@ -65,7 +65,7 @@ typedef ModbusExceptionCode (*ModbusReadDiscreteInputsCb)(uint16_t addr, uint16_
 typedef ModbusExceptionCode (*ModbusReadHoldingRegistersCb)(uint16_t addr, uint16_t count, uint8_t *dest);
 typedef ModbusExceptionCode (*ModbusReadInputRegistersCb)(uint16_t addr, uint16_t count, uint8_t *dest);
 
-typedef ModbusExceptionCode (*ModbusWriteSingleCoilCb)(uint16_t addr, uint8_t value);
+typedef ModbusExceptionCode (*ModbusWriteSingleCoilCb)(uint16_t addr, uint16_t value);
 typedef ModbusExceptionCode (*ModbusWriteSingleRegisterCb)(uint16_t addr, uint16_t value);
 typedef ModbusExceptionCode (*ModbusWriteMultipleCoilsCb)(uint16_t addr, uint16_t count, const uint8_t *src);
 typedef ModbusExceptionCode (*ModbusWriteMultipleRegistersCb)(uint16_t addr, uint16_t count, const uint8_t *src);

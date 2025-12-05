@@ -68,7 +68,7 @@ TEST(modbus_handler_write_multiple_coils, test_handle_write_multiple_coils_valid
     TEST_ASSERT_EQUAL(0x12, last_multi_coil_data[0]);
     TEST_ASSERT_EQUAL(0x34, last_multi_coil_data[1]);
     TEST_ASSERT_EQUAL_HEX8_ARRAY(&request[1], response, 4);
-    TEST_ASSERT_EQUAL(4, response_len);
+    TEST_ASSERT_EQUAL(5, response_len);
 }
 
 /**

@@ -165,10 +165,7 @@ static void modbus_process_frame(ModbusSlave *slave) {
     response[0] = request[0]; // Reassign the address
     response_len += 1;
 
-    if (ex_code == MODBUS_EX_NONE) {
-        response[1] = request[1]; // Reassign the function code
-        response_len += 1;
-    } else { // Set an exception if there was one
+    if (ex_code != MODBUS_EX_NONE) { // Set an exception if there was one
         response[1] = request[1] | MODBUS_FC_EXCEPTION_MASK;
         response[2] = (uint8_t)ex_code;
         response_len = 3;

@@ -11,7 +11,7 @@ static ModbusSlaveConfig config;
 
 // Mock callbacks
 static uint16_t last_coil_addr;
-static uint8_t last_coil_value;
+static uint16_t last_coil_value;
 
 /**
  * Mock transmit function
@@ -22,7 +22,7 @@ static void mock_write(const uint8_t *data, uint16_t length) {
     (void)(length);
 }
 
-static ModbusExceptionCode mock_write_single_coil(uint16_t addr, uint8_t value) {
+static ModbusExceptionCode mock_write_single_coil(uint16_t addr, uint16_t value) {
     last_coil_addr = addr;
     last_coil_value = value;
     
@@ -63,7 +63,7 @@ TEST(modbus_handler_write_single_coil, test_handle_write_single_coil_valid_on) {
     TEST_ASSERT_EQUAL(0x0300, last_coil_addr);
     TEST_ASSERT_EQUAL(1, last_coil_value); // Should be converted to 1
     TEST_ASSERT_EQUAL_HEX8_ARRAY(&request[1], response, 4);
-    TEST_ASSERT_EQUAL(4, response_len);
+    TEST_ASSERT_EQUAL(5, response_len);
 }
 
 /**
@@ -83,7 +83,7 @@ TEST(modbus_handler_write_single_coil, test_handle_write_single_coil_valid_off) 
     TEST_ASSERT_EQUAL(0x0300, last_coil_addr);
     TEST_ASSERT_EQUAL(0, last_coil_value); // Should be converted to 0
     TEST_ASSERT_EQUAL_HEX8_ARRAY(&request[1], response, 4);
-    TEST_ASSERT_EQUAL(4, response_len);
+    TEST_ASSERT_EQUAL(5, response_len);
 }
 
 /**

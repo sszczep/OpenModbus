@@ -1,4 +1,5 @@
 #include "modbus_slave.h"
+#include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -136,8 +137,8 @@ ModbusExceptionCode handle_write_single_coil(ModbusSlave *slave, uint8_t *respon
     ModbusExceptionCode ex = slave->config.write_single_coil(addr, (value == 0xFF00) ? 1 : 0);
     if (ex != MODBUS_EX_NONE) return ex;
 
-    for (int i = 0; i < 4; ++i) response[i] = slave->frame[1 + i];
-    *response_len += 4;
+    memcpy(response, slave->frame + 1, 5);
+    *response_len += 5;
 
     return MODBUS_EX_NONE;
 }
@@ -190,8 +191,8 @@ ModbusExceptionCode handle_write_multiple_coils(ModbusSlave *slave, uint8_t *res
     ModbusExceptionCode ex = slave->config.write_multiple_coils(addr, count, &slave->frame[7]);
     if (ex != MODBUS_EX_NONE) return ex;
 
-    for (int i = 0; i < 4; ++i) response[i] = slave->frame[1 + i];
-    *response_len += 4;
+    memcpy(response, slave->frame + 1, 5);
+	*response_len += 5;
 
     return MODBUS_EX_NONE;
 }
